@@ -1,68 +1,96 @@
-import React, { Component } from 'react';
-import { View, Dimensions } from 'react-native';
+import React from 'react';
 
+import { Dimensions } from 'react-native';
 import Canvas from 'react-native-canvas';
 
+import { userEventTypes, makeTestingNodes } from './modules/PatchbayUtils'
+import { Patchbay } from './modules/Patchbay'
 
-function drawCircle(context, color, x, y) {
-  context.strokeStyle = color;
-  context.lineWidth = 5; // hard-coded width
-  context.beginPath();
-  context.arc(x, y, 30, 0, Math.PI * 2, false);  // hard-coded radius
-  context.closePath();
-  context.stroke();
-}
-
-
-function updateBouncingCircleCoords(width, height, pos, step) {
-  pos.x += step.x;
-  if (pos.x < 0 || pos.x > width) {
-    step.x *= -1;
-    pos.x += step.x;
+class App extends React.Component {
+  render() {
+    return <div>
+      <Animation></Animation>
+    </div>;
   }
-  pos.y += step.y;
-  if (pos.y < 0 || pos.y > height) {
-    step.y *= -1;
-    pos.y += step.y;
+}
+
+class Animation extends React.Component {
+  constructor (props) {
+    super(props);
+    this.hiddenCanvasRef = React.createRef();
+    this.visibleCanvasRef = React.createRef();
+    this.patchbay = undefined;
   }
-  return [pos, step]
-}
 
-
-function drawLoop(width, height, context, pos, step) {
-  [pos, step] = updateBouncingCircleCoords(width, height, pos, step);
-  context.save();
-  context.fillStyle = 'gray';
-  context.fillRect(0, 0, width, height);
-  drawCircle(context, 'blue', pos.x, pos.y);
-  drawCircle(context, 'red', width / 2, height / 2);
-  context.restore();
-  requestAnimationFrame(() => drawLoop(width, height, context, pos, step));
-}
-
-
-class App extends Component {
-
-  initCanvas(c) {
-    const canvas = c
+  getWidthHeight () {
+    // TODO: get screen values from React-Native methods when on mobile
+    // const screenTestScaler = 0.8;
+    // const canvasWidth = Math.floor(736 * screenTestScaler);
+    // const canvasHeight = Math.floor(414 * screenTestScaler);
     const thisWindow = Dimensions.get('window');
-    canvas.width = thisWindow.width;
-    canvas.height = thisWindow.height;
-    const pos = {x: 0, y: 0};
-    const step = {x: 5, y: 5};
-    pos.x = canvas.width / 2;
-    pos.y = canvas.height / 2;
-    context = canvas.getContext('2d');
-    const width = Number(canvas.width);
-    const height = Number(canvas.height);
-    requestAnimationFrame(() => drawLoop(width, height, context, pos, step));
+    const canvasWidth = thisWindow.width;
+    const canvasHeight = thisWindow.height;
+    return [canvasWidth, canvasHeight];
+  }
+
+  setupCanvasAndGetContext (canvas, width, height) {
+    canvas.width = width;
+    canvas.height = height;
+    return canvas.getContext('2d');
+  }
+
+  componentDidMount () {
+    // get the visible and hidden canvases and contexts
+    const [width, height] = this.getWidthHeight();
+    const hiddenCanvas = this.hiddenCanvasRef.current;
+    const visibleCanvas = this.visibleCanvasRef.current;
+    const hiddenContext = this.setupCanvasAndGetContext(
+      hiddenCanvas, width, height);
+    const visibleContext = this.setupCanvasAndGetContext(
+      visibleCanvas, width, height);
+    // create a Patchbay instance with the hidden context
+    this.patchbay = new Patchbay(hiddenContext);
+    this.patchbay.setSize(width, height);
+    // add some fake nodes for testing
+    makeTestingNodes(this.patchbay);
+    // draw the hidden canvas to the visible canvas at the end of each frame
+    this.patchbay.drawLoop(() => {
+      visibleContext.drawImage(hiddenCanvas, 0, 0);
+    });
+  }
+
+  handleUserEvent (event, type) {
+    if (this.patchbay) {
+      this.patchbay.handleUserEvent(type, event.clientX, event.clientY);
+    }
   }
 
   render() {
     return (
-      <View>
-        <Canvas ref={this.initCanvas}/>
-      </View>
+      <div>
+        <Canvas
+          ref={this.visibleCanvasRef}
+          // TODO: these events will need to change for when in React-Native
+          onMouseDown={(event) => this.handleUserEvent(event, userEventTypes.touch)}
+          onMouseMove={(event) => this.handleUserEvent(event, userEventTypes.move)}
+          onMouseLeave={(event) => this.handleUserEvent(event, userEventTypes.release)}
+          onMouseUp={(event) => this.handleUserEvent(event, userEventTypes.release)}
+        />
+        <Canvas
+          // There is a bug when using react-native-canvas, where the device
+          //    renders a canvas's pixels before completing the current frame.
+          // This creates a very noticable flickering affect, where things
+          //    drawn near the end up the update cycle will appear/disappear
+          // To avoid, I'm using one hidden canvas for layering all the
+          //    shapes, lines, colors, etc, during a frame.
+          // Then at the end of that frame, I simply draw the contents of the
+          //    hidden canvas onto a visible canvas.
+          // Because all the pixels of the visible canvas are being updated all
+          //    at once, the flickering should no longer be noticable
+          style={{visibility: 'hidden'}}
+          ref={this.hiddenCanvasRef}
+        />
+      </div>
     );
   }
 }

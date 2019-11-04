@@ -7,14 +7,7 @@ import { userEventTypes, makeTestingNodes } from './modules/PatchbayUtils'
 import { Patchbay } from './modules/Patchbay'
 
 class App extends React.Component {
-  render() {
-    return <div>
-      <Animation></Animation>
-    </div>;
-  }
-}
 
-class Animation extends React.Component {
   constructor (props) {
     super(props);
     this.hiddenCanvasRef = React.createRef();

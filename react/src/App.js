@@ -1,14 +1,10 @@
 import React from 'react';
-import './App.css';
+
+// import { Dimensions } from 'react-native';
+// import Canvas from 'react-native-canvas';
 
 import { userEventTypes, makeTestingNodes } from './modules/PatchbayUtils'
 import { Patchbay } from './modules/Patchbay'
-
-// TODO: get screen values from React-Native methods when on mobile
-const screenTestScaler = 0.8;
-const canvasWidth = Math.floor(736 * screenTestScaler);
-const canvasHeight = Math.floor(414 * screenTestScaler);
-
 
 class App extends React.Component {
   render() {
@@ -26,22 +22,38 @@ class Animation extends React.Component {
     this.patchbay = undefined;
   }
 
+  getWidthHeight () {
+    // TODO: get screen values from React-Native methods when on mobile
+    const screenTestScaler = 0.8;
+    const canvasWidth = Math.floor(736 * screenTestScaler);
+    const canvasHeight = Math.floor(414 * screenTestScaler);
+    // const thisWindow = Dimensions.get('window');
+    // const canvasWidth = thisWindow.width;
+    // const canvasHeight = thisWindow.height;
+    return [canvasWidth, canvasHeight];
+  }
+
   setupCanvasAndGetContext (canvas, width, height) {
-    canvas.width = canvasWidth;
-    canvas.height = canvasHeight;
+    canvas.width = width;
+    canvas.height = height;
     return canvas.getContext('2d');
   }
 
   componentDidMount () {
+    // get the visible and hidden canvases and contexts
+    const [width, height] = this.getWidthHeight();
     const hiddenCanvas = this.hiddenCanvasRef.current;
     const visibleCanvas = this.visibleCanvasRef.current;
     const hiddenContext = this.setupCanvasAndGetContext(
-      hiddenCanvas, canvasWidth, canvasHeight);
+      hiddenCanvas, width, height);
     const visibleContext = this.setupCanvasAndGetContext(
-      visibleCanvas, canvasWidth, canvasHeight);
+      visibleCanvas, width, height);
+    // create a Patchbay instance with the hidden context
     this.patchbay = new Patchbay(hiddenContext);
-    this.patchbay.setSize(canvasWidth, canvasHeight);
+    this.patchbay.setSize(width, height);
+    // add some fake nodes for testing
     makeTestingNodes(this.patchbay);
+    // draw the hidden canvas to the visible canvas at the end of each frame
     this.patchbay.drawLoop(() => {
       visibleContext.drawImage(hiddenCanvas, 0, 0);
     });
@@ -82,6 +94,5 @@ class Animation extends React.Component {
     );
   }
 }
-
 
 export default App;

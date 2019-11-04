@@ -75,7 +75,7 @@ class Patchbay {
     this.outCircle.y = (this.height / 2) + yOffset;
   }
 
-  drawLoop () {
+  drawLoop (onNewFrame) {
     if (this.reqAnimFrame) {
       this.cancelDrawLoop();
     }
@@ -101,7 +101,11 @@ class Patchbay {
     this.finger.draw();
     this.context.restore();
 
-    this.reqAnimFrame = requestAnimationFrame(() => this.drawLoop());
+    if (onNewFrame) {
+      onNewFrame();
+    }
+
+    this.reqAnimFrame = requestAnimationFrame(() => this.drawLoop(onNewFrame));
   }
 
   cancelDrawLoop () {

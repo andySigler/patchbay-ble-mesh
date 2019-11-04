@@ -171,7 +171,7 @@ class Circle {
     }
     if (!this.touched) {
       this._radiansMoved *= circleDefaults.rotateFeedback;
-      if (this._radiansMoved < 0.0001) {
+      if (Math.abs(this._radiansMoved) < 0.0001) {
         this._radiansMoved = 0;
       }
     }

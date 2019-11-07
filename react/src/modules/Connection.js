@@ -76,7 +76,7 @@ class Connection {
       this._lineWidth = cordDefaults.lineWidthPixels * this.sizeScaler;
 
       // colors
-      this.lineFill = utils.colors.white(this.sizeScaler);
+      this.lineFill = utils.colors.white(this. );
       this.lineStroke = utils.colors.white(this.sizeScaler);
 
       if (this._selected) {
@@ -120,10 +120,10 @@ class Connection {
         this._lineWidth, 0, // use the line's width for a radius
         undefined, this.lineFill
       )
-      this.context.restore();
       if(this._selected){
         this.drawDeleteCircle();
       }
+      this.context.restore();
     }
   }
 

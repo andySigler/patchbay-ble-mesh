@@ -1,0 +1,631 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A1409E012371F33B00ECDC48 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1409E002371F33B00ECDC48 /* AppDelegate.swift */; };
+		A1409E032371F33B00ECDC48 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1409E022371F33B00ECDC48 /* SceneDelegate.swift */; };
+		A1409E052371F33B00ECDC48 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1409E042371F33B00ECDC48 /* ViewController.swift */; };
+		A1409E082371F33B00ECDC48 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A1409E062371F33B00ECDC48 /* Main.storyboard */; };
+		A1409E0A2371F34200ECDC48 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1409E092371F34200ECDC48 /* Assets.xcassets */; };
+		A1409E0D2371F34200ECDC48 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A1409E0B2371F34200ECDC48 /* LaunchScreen.storyboard */; };
+		A1409E182371F34200ECDC48 /* patchbay_uiTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1409E172371F34200ECDC48 /* patchbay_uiTests.swift */; };
+		A1409E232371F3AD00ECDC48 /* PatchbayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1409E222371F3AD00ECDC48 /* PatchbayView.swift */; };
+		A1409E262371F9E900ECDC48 /* PatchbayUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1409E252371F9E900ECDC48 /* PatchbayUtils.swift */; };
+		A1409E272371F9E900ECDC48 /* PatchbayUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1409E252371F9E900ECDC48 /* PatchbayUtils.swift */; };
+		A14D24C4237451C700EE81A9 /* PatchbayConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = A14D24C3237451C600EE81A9 /* PatchbayConnection.swift */; };
+		A14D24C62374521A00EE81A9 /* PatchbayFinger.swift in Sources */ = {isa = PBXBuildFile; fileRef = A14D24C52374521A00EE81A9 /* PatchbayFinger.swift */; };
+		A14D24C823747E9800EE81A9 /* patchbayConnectionTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A14D24C723747E9800EE81A9 /* patchbayConnectionTest.swift */; };
+		A14D24CA23748E6100EE81A9 /* patchbayTestArc.swift in Sources */ = {isa = PBXBuildFile; fileRef = A14D24C923748E6100EE81A9 /* patchbayTestArc.swift */; };
+		A15548A2237348AD009E95B7 /* patchbayPortTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15548A1237348AD009E95B7 /* patchbayPortTest.swift */; };
+		A15548A423734980009E95B7 /* PatchbayPort.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15548A323734980009E95B7 /* PatchbayPort.swift */; };
+		A15548A623734A43009E95B7 /* PatchbayArc.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15548A523734A43009E95B7 /* PatchbayArc.swift */; };
+		A15548AC23734B2E009E95B7 /* PatchbayCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15548AB23734B2E009E95B7 /* PatchbayCircle.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		A1409E142371F34200ECDC48 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A1409DF52371F33B00ECDC48 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A1409DFC2371F33B00ECDC48;
+			remoteInfo = "patchbay-ui";
+		};
+		A1409E312372501700ECDC48 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A1409DF52371F33B00ECDC48 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A1409DFC2371F33B00ECDC48;
+			remoteInfo = "patchbay-ui";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		A1409DFD2371F33B00ECDC48 /* patchbay-ui.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "patchbay-ui.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A1409E002371F33B00ECDC48 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		A1409E022371F33B00ECDC48 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		A1409E042371F33B00ECDC48 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		A1409E072371F33B00ECDC48 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		A1409E092371F34200ECDC48 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A1409E0C2371F34200ECDC48 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		A1409E0E2371F34200ECDC48 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A1409E132371F34200ECDC48 /* patchbay-uiTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "patchbay-uiTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A1409E172371F34200ECDC48 /* patchbay_uiTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = patchbay_uiTests.swift; sourceTree = "<group>"; };
+		A1409E192371F34200ECDC48 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A1409E222371F3AD00ECDC48 /* PatchbayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatchbayView.swift; sourceTree = "<group>"; };
+		A1409E252371F9E900ECDC48 /* PatchbayUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatchbayUtils.swift; sourceTree = "<group>"; };
+		A1409E2C2372501700ECDC48 /* Patchbay-Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Patchbay-Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A14D24C3237451C600EE81A9 /* PatchbayConnection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatchbayConnection.swift; sourceTree = "<group>"; };
+		A14D24C52374521A00EE81A9 /* PatchbayFinger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatchbayFinger.swift; sourceTree = "<group>"; };
+		A14D24C723747E9800EE81A9 /* patchbayConnectionTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = patchbayConnectionTest.swift; sourceTree = "<group>"; };
+		A14D24C923748E6100EE81A9 /* patchbayTestArc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = patchbayTestArc.swift; sourceTree = "<group>"; };
+		A15548A1237348AD009E95B7 /* patchbayPortTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = patchbayPortTest.swift; sourceTree = "<group>"; };
+		A15548A323734980009E95B7 /* PatchbayPort.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatchbayPort.swift; sourceTree = "<group>"; };
+		A15548A523734A43009E95B7 /* PatchbayArc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatchbayArc.swift; sourceTree = "<group>"; };
+		A15548AB23734B2E009E95B7 /* PatchbayCircle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatchbayCircle.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A1409DFA2371F33B00ECDC48 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A1409E102371F34200ECDC48 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A1409E292372501700ECDC48 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A1409DF42371F33B00ECDC48 = {
+			isa = PBXGroup;
+			children = (
+				A1409DFF2371F33B00ECDC48 /* patchbay-ui */,
+				A1409E162371F34200ECDC48 /* patchbay-uiTests */,
+				A1409DFE2371F33B00ECDC48 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		A1409DFE2371F33B00ECDC48 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A1409DFD2371F33B00ECDC48 /* patchbay-ui.app */,
+				A1409E132371F34200ECDC48 /* patchbay-uiTests.xctest */,
+				A1409E2C2372501700ECDC48 /* Patchbay-Tests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A1409DFF2371F33B00ECDC48 /* patchbay-ui */ = {
+			isa = PBXGroup;
+			children = (
+				A1409E222371F3AD00ECDC48 /* PatchbayView.swift */,
+				A1409E242371F9C600ECDC48 /* modules */,
+				A1409E002371F33B00ECDC48 /* AppDelegate.swift */,
+				A1409E022371F33B00ECDC48 /* SceneDelegate.swift */,
+				A1409E042371F33B00ECDC48 /* ViewController.swift */,
+				A1409E062371F33B00ECDC48 /* Main.storyboard */,
+				A1409E092371F34200ECDC48 /* Assets.xcassets */,
+				A1409E0B2371F34200ECDC48 /* LaunchScreen.storyboard */,
+				A1409E0E2371F34200ECDC48 /* Info.plist */,
+			);
+			path = "patchbay-ui";
+			sourceTree = "<group>";
+		};
+		A1409E162371F34200ECDC48 /* patchbay-uiTests */ = {
+			isa = PBXGroup;
+			children = (
+				A14D24C923748E6100EE81A9 /* patchbayTestArc.swift */,
+				A14D24C723747E9800EE81A9 /* patchbayConnectionTest.swift */,
+				A15548A1237348AD009E95B7 /* patchbayPortTest.swift */,
+				A1409E172371F34200ECDC48 /* patchbay_uiTests.swift */,
+				A1409E192371F34200ECDC48 /* Info.plist */,
+			);
+			path = "patchbay-uiTests";
+			sourceTree = "<group>";
+		};
+		A1409E242371F9C600ECDC48 /* modules */ = {
+			isa = PBXGroup;
+			children = (
+				A14D24C52374521A00EE81A9 /* PatchbayFinger.swift */,
+				A14D24C3237451C600EE81A9 /* PatchbayConnection.swift */,
+				A15548AB23734B2E009E95B7 /* PatchbayCircle.swift */,
+				A15548A523734A43009E95B7 /* PatchbayArc.swift */,
+				A15548A323734980009E95B7 /* PatchbayPort.swift */,
+				A1409E252371F9E900ECDC48 /* PatchbayUtils.swift */,
+			);
+			path = modules;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A1409DFC2371F33B00ECDC48 /* patchbay-ui */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A1409E1C2371F34200ECDC48 /* Build configuration list for PBXNativeTarget "patchbay-ui" */;
+			buildPhases = (
+				A1409DF92371F33B00ECDC48 /* Sources */,
+				A1409DFA2371F33B00ECDC48 /* Frameworks */,
+				A1409DFB2371F33B00ECDC48 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "patchbay-ui";
+			productName = "patchbay-ui";
+			productReference = A1409DFD2371F33B00ECDC48 /* patchbay-ui.app */;
+			productType = "com.apple.product-type.application";
+		};
+		A1409E122371F34200ECDC48 /* patchbay-uiTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A1409E1F2371F34200ECDC48 /* Build configuration list for PBXNativeTarget "patchbay-uiTests" */;
+			buildPhases = (
+				A1409E0F2371F34200ECDC48 /* Sources */,
+				A1409E102371F34200ECDC48 /* Frameworks */,
+				A1409E112371F34200ECDC48 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A1409E152371F34200ECDC48 /* PBXTargetDependency */,
+			);
+			name = "patchbay-uiTests";
+			productName = "patchbay-uiTests";
+			productReference = A1409E132371F34200ECDC48 /* patchbay-uiTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		A1409E2B2372501700ECDC48 /* Patchbay-Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A1409E332372501700ECDC48 /* Build configuration list for PBXNativeTarget "Patchbay-Tests" */;
+			buildPhases = (
+				A1409E282372501700ECDC48 /* Sources */,
+				A1409E292372501700ECDC48 /* Frameworks */,
+				A1409E2A2372501700ECDC48 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A1409E322372501700ECDC48 /* PBXTargetDependency */,
+			);
+			name = "Patchbay-Tests";
+			productName = "Patchbay-Tests";
+			productReference = A1409E2C2372501700ECDC48 /* Patchbay-Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A1409DF52371F33B00ECDC48 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1110;
+				LastUpgradeCheck = 1110;
+				ORGANIZATIONNAME = Andy;
+				TargetAttributes = {
+					A1409DFC2371F33B00ECDC48 = {
+						CreatedOnToolsVersion = 11.1;
+					};
+					A1409E122371F34200ECDC48 = {
+						CreatedOnToolsVersion = 11.1;
+						TestTargetID = A1409DFC2371F33B00ECDC48;
+					};
+					A1409E2B2372501700ECDC48 = {
+						CreatedOnToolsVersion = 11.1;
+						TestTargetID = A1409DFC2371F33B00ECDC48;
+					};
+				};
+			};
+			buildConfigurationList = A1409DF82371F33B00ECDC48 /* Build configuration list for PBXProject "patchbay-ui" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = A1409DF42371F33B00ECDC48;
+			productRefGroup = A1409DFE2371F33B00ECDC48 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A1409DFC2371F33B00ECDC48 /* patchbay-ui */,
+				A1409E122371F34200ECDC48 /* patchbay-uiTests */,
+				A1409E2B2372501700ECDC48 /* Patchbay-Tests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A1409DFB2371F33B00ECDC48 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A1409E0D2371F34200ECDC48 /* LaunchScreen.storyboard in Resources */,
+				A1409E0A2371F34200ECDC48 /* Assets.xcassets in Resources */,
+				A1409E082371F33B00ECDC48 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A1409E112371F34200ECDC48 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A1409E2A2372501700ECDC48 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A1409DF92371F33B00ECDC48 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A15548A423734980009E95B7 /* PatchbayPort.swift in Sources */,
+				A15548A623734A43009E95B7 /* PatchbayArc.swift in Sources */,
+				A1409E232371F3AD00ECDC48 /* PatchbayView.swift in Sources */,
+				A1409E052371F33B00ECDC48 /* ViewController.swift in Sources */,
+				A1409E012371F33B00ECDC48 /* AppDelegate.swift in Sources */,
+				A14D24C4237451C700EE81A9 /* PatchbayConnection.swift in Sources */,
+				A15548AC23734B2E009E95B7 /* PatchbayCircle.swift in Sources */,
+				A1409E262371F9E900ECDC48 /* PatchbayUtils.swift in Sources */,
+				A14D24C62374521A00EE81A9 /* PatchbayFinger.swift in Sources */,
+				A1409E032371F33B00ECDC48 /* SceneDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A1409E0F2371F34200ECDC48 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A15548A2237348AD009E95B7 /* patchbayPortTest.swift in Sources */,
+				A14D24CA23748E6100EE81A9 /* patchbayTestArc.swift in Sources */,
+				A1409E182371F34200ECDC48 /* patchbay_uiTests.swift in Sources */,
+				A1409E272371F9E900ECDC48 /* PatchbayUtils.swift in Sources */,
+				A14D24C823747E9800EE81A9 /* patchbayConnectionTest.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A1409E282372501700ECDC48 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		A1409E152371F34200ECDC48 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A1409DFC2371F33B00ECDC48 /* patchbay-ui */;
+			targetProxy = A1409E142371F34200ECDC48 /* PBXContainerItemProxy */;
+		};
+		A1409E322372501700ECDC48 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A1409DFC2371F33B00ECDC48 /* patchbay-ui */;
+			targetProxy = A1409E312372501700ECDC48 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		A1409E062371F33B00ECDC48 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A1409E072371F33B00ECDC48 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		A1409E0B2371F34200ECDC48 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A1409E0C2371F34200ECDC48 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		A1409E1A2371F34200ECDC48 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		A1409E1B2371F34200ECDC48 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		A1409E1D2371F34200ECDC48 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = KYYX55883Q;
+				INFOPLIST_FILE = "patchbay-ui/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "Andy.patchbay-ui";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		A1409E1E2371F34200ECDC48 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = KYYX55883Q;
+				INFOPLIST_FILE = "patchbay-ui/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "Andy.patchbay-ui";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		A1409E202371F34200ECDC48 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = KYYX55883Q;
+				INFOPLIST_FILE = "patchbay-uiTests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "Andy.patchbay-uiTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/patchbay-ui.app/patchbay-ui";
+			};
+			name = Debug;
+		};
+		A1409E212371F34200ECDC48 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = KYYX55883Q;
+				INFOPLIST_FILE = "patchbay-uiTests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "Andy.patchbay-uiTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/patchbay-ui.app/patchbay-ui";
+			};
+			name = Release;
+		};
+		A1409E342372501700ECDC48 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = KYYX55883Q;
+				INFOPLIST_FILE = "Patchbay-Tests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "Andy.Patchbay-Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/patchbay-ui.app/patchbay-ui";
+			};
+			name = Debug;
+		};
+		A1409E352372501700ECDC48 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = KYYX55883Q;
+				INFOPLIST_FILE = "Patchbay-Tests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "Andy.Patchbay-Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/patchbay-ui.app/patchbay-ui";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A1409DF82371F33B00ECDC48 /* Build configuration list for PBXProject "patchbay-ui" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A1409E1A2371F34200ECDC48 /* Debug */,
+				A1409E1B2371F34200ECDC48 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A1409E1C2371F34200ECDC48 /* Build configuration list for PBXNativeTarget "patchbay-ui" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A1409E1D2371F34200ECDC48 /* Debug */,
+				A1409E1E2371F34200ECDC48 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A1409E1F2371F34200ECDC48 /* Build configuration list for PBXNativeTarget "patchbay-uiTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A1409E202371F34200ECDC48 /* Debug */,
+				A1409E212371F34200ECDC48 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A1409E332372501700ECDC48 /* Build configuration list for PBXNativeTarget "Patchbay-Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A1409E342372501700ECDC48 /* Debug */,
+				A1409E352372501700ECDC48 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = A1409DF52371F33B00ECDC48 /* Project object */;
+}

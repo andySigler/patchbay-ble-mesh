@@ -184,12 +184,6 @@ class Circle {
       relativeMovement = 1 + (relativeMovement % 1);
     }
     if (relativeMovement < 1 && relativeMovement > -1) {
-      if (Math.abs(relativeMovement) < 0) {
-        this.direction = -1;
-      }
-      else {
-        this.direction = 1;
-      }
       const animStep = relativeMovement / (1 / this._arcs.length);
       this.rotatePercent -= animStep;
 

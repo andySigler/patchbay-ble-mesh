@@ -14,6 +14,12 @@ const clipValue = (value, min = -Infinity, max = Infinity) => {
   return Math.min(Math.max(value, min), max);
 }
 
+const getDistance = (x1, y1, x2, y2) => {
+  var xDiff = x1 - x2;
+  var yDiff = y1 - y2;
+  return Math.sqrt(xDiff * xDiff + yDiff * yDiff);
+}
+
 const colors = {
   black: (opacity = 1.0) => `rgba(0, 0, 0, ${clipValue(opacity, 0, 1)})`,
   white: (opacity = 1.0) => `rgba(255, 255, 255, ${clipValue(opacity, 0, 1)})`,
@@ -66,12 +72,6 @@ const drawArc = (context, x, y, radius, start, end, width, stroke = undefined, f
   context.arc(x, y, radius, start, end, false);
   if (stroke) context.stroke();
   if (fill) context.fill();
-}
-
-const getDistance = (x1, y1, x2, y2) => {
-  var xDiff = x1 - x2;
-  var yDiff = y1 - y2;
-  return Math.sqrt(xDiff * xDiff + yDiff * yDiff);
 }
 
 const fakeContext = {

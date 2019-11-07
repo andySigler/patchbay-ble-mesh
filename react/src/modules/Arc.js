@@ -197,17 +197,11 @@ class Arc {
     this.context.rotate((this.start + (this.rotStep / 2)) - (utils.PI * 0.5));
     for (let port of this._ports) {
       if (port.visible) {
-        port.draw(this._sizeScaler);
+        port.draw();
       }
       this.context.rotate(this.rotStep);
     }
     this.context.restore();
-  }
-
-  modifySizeScaler (sizeScaler) {
-    sizeScaler = utils.clipValue(
-      sizeScaler * arcDefaults.sizeScalerPreMultiplier, 0, 1);
-    return Math.pow(sizeScaler, 2);
   }
 }
 

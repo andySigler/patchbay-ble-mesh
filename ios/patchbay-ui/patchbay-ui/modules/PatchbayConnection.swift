@@ -58,7 +58,7 @@ public class Connection {
         self.point = self.getCurrentPoint()
     }
     
-    public func adjustToScreenSize(screenSize: CGFloat) {
+    public func adjustToScreenSize(_ screenSize: CGFloat) {
         radius = screenSize * defaults["screenSizeScaler"]!
     }
     

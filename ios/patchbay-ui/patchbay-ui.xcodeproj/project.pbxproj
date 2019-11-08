@@ -10,6 +10,7 @@
 		A10B56872375CE1000812E73 /* pachbayCircleTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10B56862375CE1000812E73 /* pachbayCircleTest.swift */; };
 		A10B56892375D41000812E73 /* Patchbay.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10B56882375D41000812E73 /* Patchbay.swift */; };
 		A10B568B2375E08600812E73 /* patchbayFingerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10B568A2375E08600812E73 /* patchbayFingerTest.swift */; };
+		A10B568D237628C200812E73 /* patchbayTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10B568C237628C200812E73 /* patchbayTest.swift */; };
 		A1409E012371F33B00ECDC48 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1409E002371F33B00ECDC48 /* AppDelegate.swift */; };
 		A1409E032371F33B00ECDC48 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1409E022371F33B00ECDC48 /* SceneDelegate.swift */; };
 		A1409E052371F33B00ECDC48 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1409E042371F33B00ECDC48 /* ViewController.swift */; };
@@ -51,6 +52,7 @@
 		A10B56862375CE1000812E73 /* pachbayCircleTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pachbayCircleTest.swift; sourceTree = "<group>"; };
 		A10B56882375D41000812E73 /* Patchbay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Patchbay.swift; sourceTree = "<group>"; };
 		A10B568A2375E08600812E73 /* patchbayFingerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = patchbayFingerTest.swift; sourceTree = "<group>"; };
+		A10B568C237628C200812E73 /* patchbayTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = patchbayTest.swift; sourceTree = "<group>"; };
 		A1409DFD2371F33B00ECDC48 /* patchbay-ui.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "patchbay-ui.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1409E002371F33B00ECDC48 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A1409E022371F33B00ECDC48 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -138,6 +140,7 @@
 		A1409E162371F34200ECDC48 /* patchbay-uiTests */ = {
 			isa = PBXGroup;
 			children = (
+				A10B568C237628C200812E73 /* patchbayTest.swift */,
 				A10B568A2375E08600812E73 /* patchbayFingerTest.swift */,
 				A10B56862375CE1000812E73 /* pachbayCircleTest.swift */,
 				A14D24C923748E6100EE81A9 /* patchbayTestArc.swift */,
@@ -313,6 +316,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A10B56872375CE1000812E73 /* pachbayCircleTest.swift in Sources */,
+				A10B568D237628C200812E73 /* patchbayTest.swift in Sources */,
 				A10B568B2375E08600812E73 /* patchbayFingerTest.swift in Sources */,
 				A15548A2237348AD009E95B7 /* patchbayPortTest.swift in Sources */,
 				A14D24CA23748E6100EE81A9 /* patchbayTestArc.swift in Sources */,

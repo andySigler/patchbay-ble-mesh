@@ -129,7 +129,7 @@ public class Circle {
         return eArcs
     }
     
-    public func adjustToScreenSize(screenSize: CGFloat) {
+    public func adjustToScreenSize(_ screenSize: CGFloat) {
         lineWidth = thicknessPercentage * screenSize;
         radius = radiusPercentage * screenSize;
         typeFontSize = defaults["typeFontSizeScaler"]! * screenSize;

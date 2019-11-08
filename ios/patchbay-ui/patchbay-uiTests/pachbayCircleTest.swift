@@ -89,7 +89,7 @@ class pachbayCircleTest: XCTestCase {
     }
     
     func testUpdateDrawWithoutBreaking() {
-        inCircle.adjustToScreenSize(screenSize: 400)
+        inCircle.adjustToScreenSize(400)
         inCircle.update(0.1)
         inCircle.draw(context)
         let arc1 = inCircle.createArc(
@@ -104,7 +104,7 @@ class pachbayCircleTest: XCTestCase {
     
     func testKnowsItIsInteractedWidth() {
         inCircle.point = CGPoint(x: 400, y: 400)
-        inCircle.adjustToScreenSize(screenSize: 800)
+        inCircle.adjustToScreenSize(800)
         XCTAssertFalse(
             inCircle.isCloseTo(point: CGPoint(x: 400, y: 400)))
         XCTAssertFalse(

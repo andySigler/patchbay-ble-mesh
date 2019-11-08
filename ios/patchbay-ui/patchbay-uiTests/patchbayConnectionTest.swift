@@ -92,7 +92,7 @@ class patchbayConnectionTest: XCTestCase {
     }
     
     func testVisibleFlag() {
-        testConnection.adjustToScreenSize(screenSize: 400)
+        testConnection.adjustToScreenSize(400)
         inPort.visible = false
         outPort.visible = false
         testConnection.update(0.1)
@@ -112,7 +112,7 @@ class patchbayConnectionTest: XCTestCase {
     }
     
     func testSizeScaler() {
-        testConnection.adjustToScreenSize(screenSize: 400)
+        testConnection.adjustToScreenSize(400)
         inPort.visible = true
         outPort.visible = true
         inPort.sizeScaler = 0.0
@@ -134,7 +134,7 @@ class patchbayConnectionTest: XCTestCase {
     }
     
     func testUpdateVariables() {
-        testConnection.adjustToScreenSize(screenSize: 400)
+        testConnection.adjustToScreenSize(400)
         inPort.visible = true
         outPort.visible = true
         inPort.sizeScaler = 1.0
@@ -151,7 +151,7 @@ class patchbayConnectionTest: XCTestCase {
     }
     
     func testUpdateVariablesWhileSelected() {
-        testConnection.adjustToScreenSize(screenSize: 400)
+        testConnection.adjustToScreenSize(400)
         inPort.visible = true
         outPort.visible = true
         inPort.sizeScaler = 1.0
@@ -170,7 +170,7 @@ class patchbayConnectionTest: XCTestCase {
     }
     
     func testCanDrawWithoutBreaking() {
-        testConnection.adjustToScreenSize(screenSize: 400)
+        testConnection.adjustToScreenSize(400)
         inPort.visible = true
         outPort.visible = true
         inPort.sizeScaler = 0.0
@@ -190,7 +190,7 @@ class patchbayConnectionTest: XCTestCase {
     }
     
     func testCanDetectUserTouching() {
-        testConnection.adjustToScreenSize(screenSize: 400)
+        testConnection.adjustToScreenSize(400)
         inPort.visible = true
         outPort.visible = true
         inPort.sizeScaler = 1.0

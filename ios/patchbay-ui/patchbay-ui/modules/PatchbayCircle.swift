@@ -46,23 +46,33 @@ public class Circle {
     var autoStepsPerSeconds: CGFloat = 0
     
     var typeFontSize: CGFloat = 0
+    let typeFontColor: CGColor = Colors.black()
     var arcTextScaler: CGFloat = 0
+    var typeYOffset: CGFloat = 0
+    var xOffset0: CGFloat = 0
+    var xOffset1: CGFloat = 0
+    var arc0FontSize: CGFloat = 0
+    var arc1FontSize: CGFloat = 0
+    var arc0Color: CGColor = Colors.black()
+    var arc1Color: CGColor = Colors.black()
     
-    var getGlobalTouchedPort: () -> Port?
-    var getGlobalHoveredPort: () -> Port?
+    var getTouchedPort: () -> Port?
+    var getHoveredPort: () -> Port?
     
-    init(_ t: String, _ rPerc: CGFloat, _ tPerc: CGFloat, touchedPort tp: @escaping () -> Port?, hoveredPort hp: @escaping () -> Port?) {
+    init(_ t: String, _ rPerc: CGFloat, _ tPerc: CGFloat,
+         getTouchedPort gtp: @escaping () -> Port?,
+         getHoveredPort ghp: @escaping () -> Port?) {
         self.type = t
         self.radiusPercentage = rPerc
         self.thicknessPercentage = tPerc
-        self.getGlobalTouchedPort = tp
-        self.getGlobalHoveredPort = hp
+        self.getTouchedPort = gtp
+        self.getHoveredPort = ghp
     }
     
     public func createArc(id arcID: String, name arcName: String, color arcColor: CGColor) -> Arc {
         let arc = Arc(
             parent: self, type: type, id: arcID, name: arcName, color: arcColor,
-            touchedPort: getGlobalTouchedPort, hoveredPort: getGlobalHoveredPort)
+            getTouchedPort: getTouchedPort, getHoveredPort: getHoveredPort)
         arc.adjustToScreenSize(radius: radius, width: lineWidth, point: point)
         return arc
     }
@@ -101,7 +111,7 @@ public class Circle {
     }
     
     public func holdsTouchedPort() -> Bool {
-        if let port = getGlobalTouchedPort() {
+        if let port = getTouchedPort() {
             return port.type == type
         }
         return false
@@ -131,34 +141,26 @@ public class Circle {
     }
     
     public func update(_ secBwFrames: CGFloat) {
+        if arcs.count == 0 {
+            return
+        }
         if isAutoMoving {
             updateAutoMoving(secBwFrames)
         }
         else {
             updateRotateDrag(secBwFrames)
         }
-        for (i, arc) in arcs.enumerated() {
-            if let arcIndex = getIndexOfArc(arc: arc) {
-                var sizeScaler = rotatePercent
-                if expandedOffset == arcIndex {
-                    sizeScaler = 1 - sizeScaler
-                }
-                let startEndPoints = getRotatedStartEndPointsForArc(index: i)
-                let isExpanded = i < 2
-                arc.update(
-                    secBwFrames, start: startEndPoints.x, end: startEndPoints.y,
-                    isSelected: isExpanded, sizeScaler: sizeScaler)
-            }
-        }
+        updateArcs(secBwFrames)
+        updateTexts()
     }
     
     public func draw(_ context: CGContext) {
+        if arcs.count == 0 {
+            return
+        }
         context.saveGState()
         context.translateBy(x: point.x, y: point.y)
-        // draw the TYPE text in the center of the Circle
-        // then draw the currently displayed arc's name
-        // draw the next-in-line Arc's label (fading in/out)
-        // now draw the actual child Arcs
+        drawTexts(context)
         for arc in arcs {
             arc.draw(context)
         }
@@ -210,6 +212,71 @@ public class Circle {
         for arc in arcs {
             arc.touched = false
         }
+    }
+    
+    func drawTexts(_ context: CGContext) {
+        // draw the TYPE
+        Draw.textCenter(
+            context, type.uppercased(), x: 0, y: typeYOffset,
+            size: typeFontSize, color: typeFontColor, bold: true)
+        // draw the ARC0 name
+        Draw.textCenter(
+            context, type, x: xOffset0, y: 0,
+            size: arc0FontSize, color: arc0Color)
+        // draw the ARC1 name
+        Draw.textCenter(
+            context, type, x: xOffset1, y: 0,
+            size: arc1FontSize, color: arc1Color)
+    }
+    
+    func updateArcs(_ secBwFrames: CGFloat) {
+        for (i, arc) in arcs.enumerated() {
+            if let arcIndex = getIndexOfArc(arc: arc) {
+                var sizeScaler = rotatePercent
+                if expandedOffset == arcIndex {
+                    sizeScaler = 1 - sizeScaler
+                }
+                let startEndPoints = getRotatedStartEndPointsForArc(index: i)
+                let isExpanded = i < 2
+                arc.update(
+                    secBwFrames, start: startEndPoints.x, end: startEndPoints.y,
+                    isSelected: isExpanded, sizeScaler: sizeScaler)
+            }
+        }
+    }
+    
+    func updateTexts() {
+        // variables for drawing the TYPE text in the center of the Circle
+        var labelOffsetYScaler = defaults["labelOffsetYScaler"]!
+        if type == Type.input {
+            labelOffsetYScaler *= -1
+        }
+        typeYOffset = typeFontSize * labelOffsetYScaler
+        // variables for drawing the currently displayed arc's name
+        let arc0 = arcs[expandedOffset]
+        arc0FontSize = arcTextScaler * arc0.sizeScaler
+        arc0Color = arc0.color.copy(
+            alpha: Math.clip(arc0.sizeScaler, min: 1))!
+        xOffset0 = lineWidth * arcTextScaler * rotatePercent
+        if arc0.type == Type.output {
+          xOffset0 *= -1
+        }
+        xOffset0 *= defaults["textXOffsetScaler"]!
+        // draw the next-in-line Arc's label (fading in/out)
+        var arc1Index = expandedOffset + 1
+        if arc1Index > arcs.count {
+            arc1Index -= arcs.count
+        }
+        let arc1 = arcs[arc1Index]
+        arc1FontSize = arcTextScaler * arc1.sizeScaler
+        arc1Color = arc1.color.copy(
+            alpha: Math.clip(arc1.sizeScaler, min: 1))!
+        xOffset1 = lineWidth * arcTextScaler * (1 - rotatePercent)
+        if arc1.type == Type.output {
+            xOffset1 *= -1
+        }
+        xOffset1 *= defaults["textXOffsetScaler"]!
+        xOffset1 *= -1
     }
     
     func startAutoMove (newOffset: Int) {

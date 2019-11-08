@@ -38,36 +38,36 @@ class patchbayConnectionTest: XCTestCase {
         hoveredPort = nil
         inCircle = Circle(
             Type.input, 0.5, 0.1,
-            touchedPort: {() in self.touchedPort },
-            hoveredPort: {() in self.hoveredPort })
+            getTouchedPort: {() in self.touchedPort },
+            getHoveredPort: {() in self.hoveredPort })
         outCircle = Circle(
             Type.output, 0.5, 0.1,
-            touchedPort: {() in self.touchedPort },
-            hoveredPort: {() in self.hoveredPort })
+            getTouchedPort: {() in self.touchedPort },
+            getHoveredPort: {() in self.hoveredPort })
         inArc = Arc(
             parent: inCircle, type: Type.input,
             id: "inArcID", name: "inArcName",
             color: Colors.black(),
-            touchedPort: {() in self.touchedPort },
-            hoveredPort: {() in self.hoveredPort })
+            getTouchedPort: {() in self.touchedPort },
+            getHoveredPort: {() in self.hoveredPort })
         outArc = Arc(
             parent: outCircle, type: Type.output,
             id: "outArcID", name: "outArcName",
             color: Colors.black(),
-            touchedPort: {() in self.touchedPort },
-            hoveredPort: {() in self.hoveredPort })
+            getTouchedPort: {() in self.touchedPort },
+            getHoveredPort: {() in self.hoveredPort })
         inPort = Port(
             parent: inArc, type: Type.input,
             id: "inputID", name: "inputName",
             color: Colors.black(),
-            touchedPort: {() in self.touchedPort },
-            hoveredPort: {() in self.hoveredPort })
+            getTouchedPort: {() in self.touchedPort },
+            getHoveredPort: {() in self.hoveredPort })
         outPort = Port(
             parent: outArc, type: Type.output,
             id: "outputID", name: "outputName",
             color: Colors.black(),
-            touchedPort: {() in self.touchedPort },
-            hoveredPort: {() in self.hoveredPort })
+            getTouchedPort: {() in self.touchedPort },
+            getHoveredPort: {() in self.hoveredPort })
         testConnection = Connection(input: inPort, output: outPort)
     }
 

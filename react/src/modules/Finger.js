@@ -60,7 +60,6 @@ class Finger {
   touchEvent (x, y) {
     this.touchX = x;
     this.touchY = y;
-    this.isTouchingScreen = true;
     this.moveEvent(x, y);
     if (!this.getTouchedConnection()) {
       this.unselectAllConnections();

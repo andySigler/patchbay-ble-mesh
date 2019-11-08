@@ -28,8 +28,8 @@ public class Port {
     public var visible: Bool = false
     public var sizeScaler: CGFloat = 0.0
     
-    var getGlobalTouchedPort: () -> Port?
-    var getGlobalHoveredPort: () -> Port?
+    var getTouchedPort: () -> Port?
+    var getHoveredPort: () -> Port?
     
     var textOffset: CGFloat = 0.0
     var fontSize: CGFloat = 0.0
@@ -47,15 +47,17 @@ public class Port {
     var outlineColor: CGColor = Colors.background()
     var highlightedColor: CGColor = Colors.white()
     
-    init(parent p: Arc, type t: String, id d: String, name n: String, color c: CGColor, touchedPort tp: @escaping () -> Port?, hoveredPort hp: @escaping () -> Port?) {
+    init(parent p: Arc, type t: String, id d: String, name n: String, color c: CGColor,
+         getTouchedPort gtp: @escaping () -> Port?,
+         getHoveredPort ghp: @escaping () -> Port?) {
         self.parent = p
         self.type = t
         self.id = d
         self.name = n
         self.color = c
         
-        self.getGlobalTouchedPort = tp
-        self.getGlobalHoveredPort = hp
+        self.getTouchedPort = gtp
+        self.getHoveredPort = ghp
         
         self.wobbleCounter = CGFloat.random(in: 0..<Math.PI2)
     }
@@ -144,21 +146,21 @@ public class Port {
     }
     
     public func isTouched() -> Bool {
-        if let port = getGlobalTouchedPort() {
+        if let port = getTouchedPort() {
             return port === self
         }
         return false
     }
     
     func isPotentialConnection() -> Bool {
-        if let port = getGlobalTouchedPort() {
+        if let port = getTouchedPort() {
             return port.type != type
         }
         return false
     }
     
     func isHovered() -> Bool {
-        if let port = getGlobalHoveredPort() {
+        if let port = getHoveredPort() {
             return port === self
         }
         return false

@@ -46,19 +46,21 @@ public class Arc {
     
     var ports: [Port] = []
     
-    var getGlobalTouchedPort: () -> Port?
-    var getGlobalHoveredPort: () -> Port?
+    var getTouchedPort: () -> Port?
+    var getHoveredPort: () -> Port?
     
     var color: CGColor!
     
-    init(parent p: Circle, type t: String, id i: String, name n: String, color c: CGColor, touchedPort tp: @escaping () -> Port?, hoveredPort hp: @escaping () -> Port?) {
+    init(parent p: Circle, type t: String, id i: String, name n: String, color c: CGColor,
+         getTouchedPort gtp: @escaping () -> Port?,
+         getHoveredPort ghp: @escaping () -> Port?) {
         self.parent = p
         self.type = t
         self.id = i
         self.name = n
         self.color = c
-        self.getGlobalTouchedPort = tp
-        self.getGlobalHoveredPort = hp
+        self.getTouchedPort = gtp
+        self.getHoveredPort = ghp
         self.drawnLineWidthScaler = self.defaults["emptyLineWidthScaler"]!
         if t == Type.input {
             self.angleOffset = Math.PI2 * self.defaults["angleOffsetInput"]!
@@ -72,8 +74,8 @@ public class Arc {
         let port = Port(
             parent: self, type: type,
             id: portID, name: portName, color: color,
-            touchedPort: getGlobalTouchedPort,
-            hoveredPort: getGlobalHoveredPort)
+            getTouchedPort: getTouchedPort,
+            getHoveredPort: getHoveredPort)
         port.adjustToScreenSize(radius: radius, width: lineWidth, point: point)
         return port
     }

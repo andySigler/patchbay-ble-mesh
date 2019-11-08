@@ -33,24 +33,24 @@ class patchbayTestArc: XCTestCase {
         hoveredPort = nil
         inCircle = Circle(
             Type.input, 0.5, 0.1,
-            touchedPort: {() in self.touchedPort },
-            hoveredPort: {() in self.hoveredPort })
+            getTouchedPort: {() in self.touchedPort },
+            getHoveredPort: {() in self.hoveredPort })
         outCircle = Circle(
             Type.output, 0.5, 0.1,
-            touchedPort: {() in self.touchedPort },
-            hoveredPort: {() in self.hoveredPort })
+            getTouchedPort: {() in self.touchedPort },
+            getHoveredPort: {() in self.hoveredPort })
         inArc = Arc(
             parent: inCircle, type: Type.input,
             id: "inArcID", name: "inArcName",
             color: Colors.black(),
-            touchedPort: {() in self.touchedPort },
-            hoveredPort: {() in self.hoveredPort })
+            getTouchedPort: {() in self.touchedPort },
+            getHoveredPort: {() in self.hoveredPort })
         outArc = Arc(
             parent: outCircle, type: Type.output,
             id: "outArcID", name: "outArcName",
             color: Colors.black(),
-            touchedPort: {() in self.touchedPort },
-            hoveredPort: {() in self.hoveredPort })
+            getTouchedPort: {() in self.touchedPort },
+            getHoveredPort: {() in self.hoveredPort })
     }
 
     override func tearDown() {

@@ -45,6 +45,9 @@ public class Patchbay {
     }
     
     public func update(_ secBwFrames: CGFloat) {
+        if !hasNodes() {
+            return
+        }
         finger.update()
         inCircle.update(secBwFrames)
         outCircle.update(secBwFrames)
@@ -54,6 +57,9 @@ public class Patchbay {
     }
     
     public func draw(_ context: CGContext) {
+        if !hasNodes() {
+            return
+        }
         context.saveGState()
         Draw.background(context, size.width, size.height, backgroundColor)
         inCircle.draw(context)
@@ -66,6 +72,9 @@ public class Patchbay {
     }
     
     public func handleUserEvent(_ type: String, at point: CGPoint) {
+        if !hasNodes() {
+            return
+        }
         if type == Type.touch {
             finger.touchEvent(point: point)
         }
@@ -184,6 +193,10 @@ public class Patchbay {
             setHoveredPort: setHoveredPort)
     }
     
+    func hasNodes() -> Bool {
+        return inCircle.arcs.count == outCircle.arcs.count && inCircle.arcs.count > 0
+    }
+    
     func updateScreenVariables() {
         screenSize = CGFloat.minimum(size.width, size.height)
         let xOffset = size.width * defaults["circleCenterXOffsetScaler"]!
@@ -203,5 +216,84 @@ public class Patchbay {
         for (_, conn) in connections {
             conn.adjustToScreenSize(screenSize)
         }
+    }
+    
+    func addFakeNodes() {
+        addNode(
+            id: "Phone", name: "Phone",
+            inputs: [
+                "Dial": "Dial",
+                "Mic": "Mic"
+            ],
+            outputs: [
+                "Bell": "Bell"
+            ])
+        addNode(
+            id: "Biggie", name: "Biggie",
+            outputs: [
+                "Nod": "Nod",
+                "Position": "Position"
+            ])
+        addNode(
+            id: "Switch", name: "Switch",
+            inputs: [
+                "State": "State"
+            ])
+        addNode(
+            id: "Toy-Pony", name: "Toy-Pony",
+            outputs: [
+                "speed": "speed"
+            ])
+        addNode(
+            id: "Maraca", name: "Maraca",
+            inputs: [
+                "Intensity": "Intensity",
+                "Beat": "Beat"
+            ])
+        addNode(
+            id: "Guitar", name: "Guitar",
+            inputs: [
+                "Volume": "Volume",
+                "Speed": "Speed",
+                "Pitch": "Pitch"
+            ])
+        addNode(
+            id: "Lamp", name: "Lamp",
+            outputs: [
+                "Brightness": "Brightness",
+                "State": "State"
+            ])
+        addNode(
+            id: "Boombox", name: "Boombox",
+            inputs: [
+                "Beat": "Beat",
+                "Volume": "Volume"
+            ],
+            outputs: [
+                "Volume": "Volume",
+                "Song": "Song"
+            ])
+        addNode(
+            id: "Snare", name: "Snare",
+            inputs: [
+                "Beat": "Beat",
+                "Volume": "Volume"
+            ],
+            outputs: [
+                "Volume": "Volume"
+            ])
+        addNode(
+            id: "Monome", name: "Monome",
+            inputs: [
+                "Pitch": "Pitch",
+                "State": "State"
+            ])
+        addNode(
+            id: "Drawing-Bot", name: "Drawing-Bot",
+            outputs: [
+                "Speed": "Speed",
+                "Direction": "Direction",
+                "Pen-Height": "Pen-Height"
+            ])
     }
 }

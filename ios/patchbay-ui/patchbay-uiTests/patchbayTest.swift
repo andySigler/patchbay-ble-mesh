@@ -167,4 +167,10 @@ class patchbayTest: XCTestCase {
         patchbay.update(1 / 20)
         patchbay.draw(context)
     }
+    
+    func testAddingSimulatedNodes() {
+        patchbay.addFakeNodes()
+        XCTAssertGreaterThan(patchbay.inCircle.arcs.count, 0)
+        XCTAssertGreaterThan(patchbay.outCircle.arcs.count, 0)
+    }
 }

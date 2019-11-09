@@ -185,9 +185,3 @@ public class Draw {
         text(context, msg, x: x, y: y, size: size, color: color, bold: bold, align: NSTextAlignment.left)
     }
 }
-
-public class Simulate {
-    public static func makeSimulation() {
-        //
-    }
-}

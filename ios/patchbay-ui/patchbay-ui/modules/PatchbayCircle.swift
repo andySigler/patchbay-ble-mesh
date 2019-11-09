@@ -55,6 +55,8 @@ public class Circle {
     var arc1FontSize: CGFloat = 0
     var arc0Color: CGColor = Colors.black()
     var arc1Color: CGColor = Colors.black()
+    var arc0Name: String = ""
+    var arc1Name: String = ""
     
     var getTouchedPort: () -> Port?
     var getHoveredPort: () -> Port?
@@ -221,11 +223,11 @@ public class Circle {
             size: typeFontSize, color: typeFontColor, bold: true)
         // draw the ARC0 name
         Draw.textCenter(
-            context, type, x: xOffset0, y: 0,
+            context, arc0Name, x: xOffset0, y: 0,
             size: arc0FontSize, color: arc0Color)
         // draw the ARC1 name
         Draw.textCenter(
-            context, type, x: xOffset1, y: 0,
+            context, arc1Name, x: xOffset1, y: 0,
             size: arc1FontSize, color: arc1Color)
     }
     
@@ -254,6 +256,7 @@ public class Circle {
         typeYOffset = typeFontSize * labelOffsetYScaler
         // variables for drawing the currently displayed arc's name
         let arc0 = arcs[expandedOffset]
+        arc0Name = arc0.name
         arc0FontSize = arcTextScaler * arc0.sizeScaler
         arc0Color = arc0.color.copy(
             alpha: Math.clip(arc0.sizeScaler, min: 1))!
@@ -268,6 +271,7 @@ public class Circle {
             arc1Index -= arcs.count
         }
         let arc1 = arcs[arc1Index]
+        arc1Name = arc1.name
         arc1FontSize = arcTextScaler * arc1.sizeScaler
         arc1Color = arc1.color.copy(
             alpha: Math.clip(arc1.sizeScaler, min: 1))!

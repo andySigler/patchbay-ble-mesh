@@ -10,9 +10,7 @@ import UIKit
 
 class PatchbayView: UIView {
 
-    let framerate: Int = 15
-    
-    var isLandscape: Bool = false
+    let framerate: Int = 20
     
     let patchbay: Patchbay = Patchbay()
     
@@ -36,7 +34,7 @@ class PatchbayView: UIView {
         }
     }
     
-    func onScreenRotated() {
+    func onScreenRotated(landscape: Bool) {
         // called when the orientation (frame.size.width/height) has been updated
         // this happens on load, and then each time the device rotates
         patchbay.setSize(frame.size)
@@ -46,7 +44,6 @@ class PatchbayView: UIView {
         // called when a new touch event has happened on this UIView
         // location is a CGPoint with the coordinate of the event
         // type is either Type.touchEvent, Type.moveEvent, or Type.releaseEvent
-        print("Event", type, location)
         patchbay.handleUserEvent(type, at: location)
     }
     
@@ -100,12 +97,11 @@ class PatchbayView: UIView {
         let h = UIScreen.main.bounds.height
         frame = CGRect(x: 0, y: 0, width: w, height: h);
         if w > h {
-            isLandscape = true
+            onScreenRotated(landscape: true)
         }
         else {
-            isLandscape = false
+            onScreenRotated(landscape: false)
         }
-        onScreenRotated()
     }
     
     func setupAndSaveOrientation() {

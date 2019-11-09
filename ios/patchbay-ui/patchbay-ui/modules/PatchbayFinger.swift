@@ -12,7 +12,7 @@ import UIKit
 public class Finger {
     
     let defaults: [String: CGFloat] = [
-        "tapPixelsMovedThresh": 3,
+        "tapPixelsMovedThresh": 10,
         "touchCircleRadiusScaler": 0.1,
         "touchCircleThicknessScaler": 0.01,
         "touchedLineWidth": 3
@@ -76,6 +76,8 @@ public class Finger {
     
     public func update() {
         if let _ = getTouchedPort() {
+        }
+        else {
             if inCircle.touched {
                 inCircle.radiansMoved = radianNew[Type.input]! - radianPrev[Type.input]!
             }
@@ -89,6 +91,7 @@ public class Finger {
     public func touchEvent(point p: CGPoint) {
         touchPoint = p
         moveEvent(point: p)
+        radianPrev = radianNew
         if let _ = getTouchedConnection() {
             //
         }

@@ -13,7 +13,7 @@ public class Circle {
     
     let defaults: [String: CGFloat] = [
         "autoStepsPerSeconds": 3.0,
-        "rotateFriction": 0.1,
+        "rotateFriction": 0.01,
         "padding": Math.PI / 200,
         "textXOffsetScaler": 0.075,
         "arcTextScaler": 0.04,
@@ -38,6 +38,7 @@ public class Circle {
     var arcStartEndPoints: [CGPoint] = []
     var expandedOffset: Int = 0
     var rotatePercent: CGFloat = 0
+    var arcAngleOffset: CGFloat = 0
     
     var isAutoMoving: Bool = false
     var autoTargetOffset: Int = 0
@@ -75,7 +76,7 @@ public class Circle {
         let arc = Arc(
             parent: self, type: type, id: arcID, name: arcName, color: arcColor,
             getTouchedPort: getTouchedPort, getHoveredPort: getHoveredPort)
-        arc.adjustToScreenSize(radius: radius, width: lineWidth, point: point)
+        arc.adjustToScreenSize(radius: radius, width: lineWidth, point: point, angleOffset: arcAngleOffset)
         return arc
     }
     
@@ -131,14 +132,15 @@ public class Circle {
         return eArcs
     }
     
-    public func adjustToScreenSize(_ screenSize: CGFloat) {
-        lineWidth = thicknessPercentage * screenSize;
-        radius = radiusPercentage * screenSize;
-        typeFontSize = defaults["typeFontSizeScaler"]! * screenSize;
-        arcTextScaler = defaults["arcTextScaler"]! * screenSize;
+    public func adjustToScreenSize(_ screenSize: CGFloat, angleOffset ao: CGFloat) {
+        lineWidth = thicknessPercentage * screenSize
+        radius = radiusPercentage * screenSize
+        typeFontSize = defaults["typeFontSizeScaler"]! * screenSize
+        arcTextScaler = defaults["arcTextScaler"]! * screenSize
+        arcAngleOffset = ao
         for arc in arcs {
             arc.adjustToScreenSize(
-                radius: radius, width: lineWidth, point: point)
+                radius: radius, width: lineWidth, point: point, angleOffset: arcAngleOffset)
         }
     }
     
@@ -161,7 +163,6 @@ public class Circle {
             return
         }
         context.saveGState()
-        context.translateBy(x: point.x, y: point.y)
         drawTexts(context)
         for arc in arcs {
             arc.draw(context)
@@ -217,6 +218,8 @@ public class Circle {
     }
     
     func drawTexts(_ context: CGContext) {
+        context.saveGState()
+        context.translateBy(x: point.x, y: point.y)
         // draw the TYPE
         Draw.textCenter(
             context, type.uppercased(), x: 0, y: typeYOffset,
@@ -229,21 +232,24 @@ public class Circle {
         Draw.textCenter(
             context, arc1Name, x: xOffset1, y: 0,
             size: arc1FontSize, color: arc1Color)
+        context.restoreGState()
     }
     
     func updateArcs(_ secBwFrames: CGFloat) {
-        for (i, arc) in arcs.enumerated() {
-            if let arcIndex = getIndexOfArc(arc: arc) {
-                var sizeScaler = rotatePercent
-                if expandedOffset == arcIndex {
-                    sizeScaler = 1 - sizeScaler
-                }
-                let startEndPoints = getRotatedStartEndPointsForArc(index: i)
-                let isExpanded = i < 2
-                arc.update(
-                    secBwFrames, start: startEndPoints.x, end: startEndPoints.y,
-                    isSelected: isExpanded, sizeScaler: sizeScaler)
+        for i in 0..<arcs.count {
+            var arcIndex = i + expandedOffset
+            if arcIndex >= arcs.count {
+                arcIndex -= arcs.count
             }
+            var sizeScaler = rotatePercent
+            if expandedOffset == arcIndex {
+                sizeScaler = 1 - sizeScaler
+            }
+            let startEndPoints = getRotatedStartEndPointsForArc(index: i)
+            let isExpanded = i < 2
+            arcs[arcIndex].update(
+                secBwFrames, start: startEndPoints.x, end: startEndPoints.y,
+                isSelected: isExpanded, sizeScaler: sizeScaler)
         }
     }
     
@@ -267,7 +273,7 @@ public class Circle {
         xOffset0 *= defaults["textXOffsetScaler"]!
         // draw the next-in-line Arc's label (fading in/out)
         var arc1Index = expandedOffset + 1
-        if arc1Index > arcs.count {
+        if arc1Index >= arcs.count {
             arc1Index -= arcs.count
         }
         let arc1 = arcs[arc1Index]
@@ -378,20 +384,21 @@ public class Circle {
         // `target` is the index of the neighboring arc
         // in the direction that we are rotating
         var target = i - 1;
-        if (target < 0) {
-            target = arcs.count + target;
+        if target < 0 {
+            target += arcs.count
         }
-        else if (target >= arcs.count) {
+        else if target >= arcs.count {
             target -= arcs.count
         }
         // the start/end radians are pre-calculated when arcs are added/deleted
-        let realStart = arcStartEndPoints[i].x;
-        var startDiff = arcStartEndPoints[target].x - realStart;
-        let realEnd = arcStartEndPoints[i].y;
-        var endDiff = arcStartEndPoints[target].y - realEnd;
+        let realStart = arcStartEndPoints[i].x
+        let realEnd = arcStartEndPoints[i].y
+        var startDiff = arcStartEndPoints[target].x - realStart
+        var endDiff = arcStartEndPoints[target].y - realEnd
+        // special case when it's the 2nd expanded Arc
         if i == 1 {
-            startDiff = startDiff * -1;
-            endDiff = -Math.PI2 + endDiff;
+            startDiff *= -1
+            endDiff -= Math.PI2
         }
         var currentStart = (startDiff * rotatePercent) + realStart
         var currentEnd = (endDiff * rotatePercent) + realEnd
@@ -416,24 +423,30 @@ public class Circle {
     }
     
     func updateArcStartEndPoints() {
-        arcStartEndPoints = [];
-        if (arcs.count == 1) {
-            arcStartEndPoints = [CGPoint(x: Math.PI / 2, y: Math.PI / 2)]
+        arcStartEndPoints = []
+        if arcs.count == 1 {
+            arcStartEndPoints = [CGPoint(
+                x: Math.PI / 2,
+                y: Math.PI / 2
+            )]
         }
-        else if (arcs.count == 2) {
+        else if arcs.count == 2 {
             arcStartEndPoints = [
                 CGPoint(x: Math.PI, y: Math.PI2),
                 CGPoint(x: 0, y: Math.PI)
             ]
         }
         else{
-            arcStartEndPoints = [CGPoint(x: Math.PI, y: Math.PI2)]
+            arcStartEndPoints = [CGPoint(
+                x: Math.PI,
+                y: Math.PI2
+            )]
             let smallerWidth = Math.PI / CGFloat(arcs.count - 1)
-            for i in 0..<arcs.count {
-                let newPoint = CGPoint(
+            for i in 1..<arcs.count {
+                arcStartEndPoints.append(CGPoint(
                     x: (CGFloat(i) - 1) * smallerWidth,
-                    y: CGFloat(i) * smallerWidth)
-                arcStartEndPoints.append(newPoint)
+                    y: CGFloat(i) * smallerWidth
+                ))
             }
         }
     }

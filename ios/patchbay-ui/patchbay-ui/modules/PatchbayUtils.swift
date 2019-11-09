@@ -41,7 +41,7 @@ public class Colors {
         return CGColor(srgbRed: 0.886, green: 0.153, blue: 0.153, alpha: 1.0)
     }
     public static func highlight() -> CGColor {
-        return CGColor(srgbRed: 0.392, green: 1.0, blue: 1.0, alpha: 1.0)
+        return CGColor(srgbRed: 0.392, green: 1.0, blue: 0.392, alpha: 1.0)
     }
     public static func background() -> CGColor {
         return CGColor(srgbRed: 0.31, green: 0.31, blue: 0.31, alpha: 1.0)
@@ -121,7 +121,7 @@ public class Draw {
             radius: radius,
             startAngle: start,
             endAngle: end,
-            clockwise: true // clockwise by default (same as HTML5 canvas)
+            clockwise: false
         )
         context.strokePath()
         context.restoreGState()
@@ -144,7 +144,7 @@ public class Draw {
     public static func background(_ context: CGContext, _ width: CGFloat, _ height: CGFloat, _ color: CGColor) {
         rect(context, CGRect(x: 0, y: 0, width: width, height: height), fill: color)
     }
-    public static func text(_ context: CGContext, _ msg: String, x: CGFloat, y: CGFloat, size: CGFloat, color: CGColor, bold: Bool, align: NSTextAlignment) {
+    public static func text(_ context: CGContext, _ msg: String, x: CGFloat, y: CGFloat, size: CGFloat, color: CGColor, bold: Bool, baseline: Bool, align: NSTextAlignment) {
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.alignment = align
         var font = UIFont.systemFont(ofSize: size)
@@ -154,7 +154,8 @@ public class Draw {
         let options = [
             NSAttributedString.Key.paragraphStyle: paragraphStyle,
             NSAttributedString.Key.font: font,
-            NSAttributedString.Key.foregroundColor: UIColor(cgColor: color)
+            NSAttributedString.Key.foregroundColor: UIColor(cgColor: color),
+            NSAttributedString.Key.baselineOffset: NSNumber(0.0)
         ]
         let drawnSize = msg.size(withAttributes: options)
         var xOffset: CGFloat = 0
@@ -164,9 +165,13 @@ public class Draw {
         else if align == NSTextAlignment.right {
             xOffset = drawnSize.width
         }
+        var yOffset = drawnSize.height + font.descender
+        if baseline == false {
+            yOffset /= 2
+        }
         let textBox = CGRect(
             x: x - xOffset,
-            y: y - drawnSize.height / 2,
+            y: y - yOffset,
             width: drawnSize.width,
             height: drawnSize.height
         )
@@ -175,13 +180,13 @@ public class Draw {
         msg.draw(in: textBox, withAttributes: options)
         context.restoreGState()
     }
-    public static func textCenter(_ context: CGContext, _ msg: String, x: CGFloat, y: CGFloat, size: CGFloat, color: CGColor, bold: Bool = false) {
-        text(context, msg, x: x, y: y, size: size, color: color, bold: bold, align: NSTextAlignment.center)
+    public static func textCenter(_ context: CGContext, _ msg: String, x: CGFloat, y: CGFloat, size: CGFloat, color: CGColor, bold: Bool = false, baseline: Bool = false) {
+        text(context, msg, x: x, y: y, size: size, color: color, bold: bold, baseline: baseline, align: NSTextAlignment.center)
     }
-    public static func textRight(_ context: CGContext, _ msg: String, x: CGFloat, y: CGFloat, size: CGFloat, color: CGColor, bold: Bool = false) {
-        text(context, msg, x: x, y: y, size: size, color: color, bold: bold, align: NSTextAlignment.right)
+    public static func textRight(_ context: CGContext, _ msg: String, x: CGFloat, y: CGFloat, size: CGFloat, color: CGColor, bold: Bool = false, baseline: Bool = false) {
+        text(context, msg, x: x, y: y, size: size, color: color, bold: bold, baseline: baseline, align: NSTextAlignment.right)
     }
-    public static func textLeft(_ context: CGContext, _ msg: String, x: CGFloat, y: CGFloat, size: CGFloat, color: CGColor, bold: Bool = false) {
-        text(context, msg, x: x, y: y, size: size, color: color, bold: bold, align: NSTextAlignment.left)
+    public static func textLeft(_ context: CGContext, _ msg: String, x: CGFloat, y: CGFloat, size: CGFloat, color: CGColor, bold: Bool = false, baseline: Bool = false) {
+        text(context, msg, x: x, y: y, size: size, color: color, bold: bold, baseline: baseline, align: NSTextAlignment.left)
     }
 }

@@ -14,9 +14,8 @@ public class Port {
     let defaults: [String: CGFloat] = [
         "wobbleSeconds": 2.0,
         "wobbleScaler": 0.1,
-        "outlineWidthScaler": 0.4,
+        "outlineWidthScaler": 0.2,
         "minSizeScaler": 0.25,
-        "textYAlignScaler": 0.2,
         "fontSizeScaler": 0.4
     ]
     
@@ -87,7 +86,6 @@ public class Port {
             y: (parentRadius * sin(radLocation)) + parentPoint.y
         )
         // drawArc() radius and stroke width
-        outlineWidth = radius * defaults["outlineWidthScaler"]!
         radius = (parentWidth / 2) * sizeScaler
         drawnPortRadius = radius
         if (isPotentialConnection()) {
@@ -97,6 +95,7 @@ public class Port {
             let wobbleMaxSize = defaults["wobbleScaler"]! * radius
             drawnPortRadius += sin(wobbleCounter) * wobbleMaxSize;
         }
+        outlineWidth = drawnPortRadius * defaults["outlineWidthScaler"]!
         // text settings
         textOffset = (parentRadius - (parentWidth / 2)) - outlineWidth
         fontSize = sizeScaler * parentWidth * defaults["fontSizeScaler"]!
@@ -105,6 +104,7 @@ public class Port {
     public func draw(_ context: CGContext) {
         if visible {
             context.saveGState()
+            // draws with an absolute coordinate (no translation needed)
             Draw.circle(
                 context, point, radius: radius,
                 fill: color, width: outlineWidth, stroke: outlineColor
@@ -118,19 +118,18 @@ public class Port {
         if(isTouched() || isHovered()) {
           textColor = highlightedColor
         }
-        let yOffset = fontSize * defaults["textYAlignScaler"]!
         context.saveGState()
         context.translateBy(x: textOffset, y: 0)
         if (point.x < parentPoint.x) {
             context.rotate(by: Math.PI)
             Draw.textLeft(
-                context, name, x: 0, y: yOffset,
+                context, name, x: 0, y: 0,
                 size: fontSize, color: textColor
             )
         }
         else {
             Draw.textRight(
-                context, name, x: 0, y: yOffset,
+                context, name, x: 0, y: 0,
                 size: fontSize, color: textColor
             )
         }

@@ -15,9 +15,7 @@ public class Arc {
         "emptyLineWidthScaler": 0.1,
         "gutterThicknessScaler": 0.77,
         "gutterStartEndScaler": 0.006,
-        "sizeScalerPreMultiplier": 1.9,
-        "angleOffsetInput": 0.375,
-        "angleOffsetOutput": 0.875
+        "sizeScalerPreMultiplier": 1.9
     ]
     
     public var parent: Circle!
@@ -31,7 +29,7 @@ public class Arc {
     var start: CGFloat = 0
     var end: CGFloat = 0
     var point: CGPoint = CGPoint(x: 0, y: 0)
-    var angleOffset: CGFloat!
+    var angleOffset: CGFloat = 0
     var radius: CGFloat = 0
     var lineWidth: CGFloat = 0
     var drawnLineWidth: CGFloat = 0
@@ -49,7 +47,7 @@ public class Arc {
     var getTouchedPort: () -> Port?
     var getHoveredPort: () -> Port?
     
-    var color: CGColor!
+    var color: CGColor = Colors.black()
     
     init(parent p: Circle, type t: String, id i: String, name n: String, color c: CGColor,
          getTouchedPort gtp: @escaping () -> Port?,
@@ -62,12 +60,6 @@ public class Arc {
         self.getTouchedPort = gtp
         self.getHoveredPort = ghp
         self.drawnLineWidthScaler = self.defaults["emptyLineWidthScaler"]!
-        if t == Type.input {
-            self.angleOffset = Math.PI2 * self.defaults["angleOffsetInput"]!
-        }
-        else {
-            self.angleOffset = Math.PI2 * self.defaults["angleOffsetOutput"]!
-        }
     }
     
     public func createPort(id portID: String, name portName: String) -> Port {
@@ -96,10 +88,11 @@ public class Arc {
         return nil
     }
     
-    public func adjustToScreenSize(radius r: CGFloat, width w: CGFloat, point p: CGPoint) {
-        radius = r;
-        lineWidth = w;
+    public func adjustToScreenSize(radius r: CGFloat, width w: CGFloat, point p: CGPoint, angleOffset ao: CGFloat) {
+        radius = r
+        lineWidth = w
         point = p
+        angleOffset = ao
         for port in ports {
             port.adjustToScreenSize(radius: radius, width: lineWidth, point: point);
         }
@@ -108,8 +101,8 @@ public class Arc {
     public func update(_ secBwFrames: CGFloat, start s: CGFloat, end e: CGFloat, isSelected i: Bool, sizeScaler ss: CGFloat) {
         sizeScaler = modifySizeScaler(scaler: ss)
         isSelected = i
-        start = (start + angleOffset).truncatingRemainder(dividingBy: Math.PI2)
-        end = (end + angleOffset).truncatingRemainder(dividingBy: Math.PI2)
+        start = (s + angleOffset).truncatingRemainder(dividingBy: Math.PI2)
+        end = (e + angleOffset).truncatingRemainder(dividingBy: Math.PI2)
         if end < start {
             end += Math.PI2
         }
@@ -122,10 +115,13 @@ public class Arc {
     
     public func draw(_ context: CGContext) {
         context.saveGState()
+        context.setShadow(offset: CGSize(width: 10, height: 10), blur: 1)
         Draw.arc(
             context, point, radius: radius,
             start: start, end: end,
-            width: lineWidth, stroke: color)
+            width: drawnLineWidth, stroke: color)
+        context.restoreGState()
+        context.saveGState()
         // draw a grey arc in the middle of the main arc
         if shouldDrawGutter {
             Draw.arc(
@@ -165,25 +161,28 @@ public class Arc {
     
     func drawPorts(_ context: CGContext) {
         // draw the child Ports
-        let startRot = (start + (rotStep / 2)) - (Math.PI * 0.5)
         context.saveGState()
-        context.rotate(by: startRot)
         for port in ports {
             if port.visible {
+                // Ports store their absolute coordinate
+                // so no need for translation/rotation
                 port.draw(context)
             }
-            context.rotate(by: rotStep)
         }
         context.restoreGState()
     }
     
     func drawAllPortNames(_ context: CGContext) {
+        context.saveGState()
+        context.translateBy(x: point.x, y: point.y)
         for port in ports {
             drawPortName(context, port: port)
         }
+        context.restoreGState()
     }
     
     func drawPortName(_ context: CGContext, port: Port) {
+        // at this point, must already be translated to the center of the Circle
         if let indexOfPort = getIndexOfPort(port: port) {
             let portRelRadsToPort = rotStep * CGFloat(indexOfPort)
             let radiansToTouchedPort = start + (rotStep / 2) + portRelRadsToPort

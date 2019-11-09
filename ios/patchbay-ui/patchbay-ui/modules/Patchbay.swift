@@ -12,10 +12,16 @@ import UIKit
 public class Patchbay {
     
     let defaults: [String: CGFloat] = [
-        "screenPercentage": 0.25,
-        "arcThicknessPercentage": 0.08,
-        "circleCenterXOffsetScaler": 0.3,
-        "circleCenterYOffsetScaler": 0.1
+        "screenPercentage": 0.35,
+        "arcThicknessPercentage": 0.1,
+        "circleXOffsetScalerLandscape": 0.25,
+        "circleYOffsetScalerLandscape": 0.05,
+        "circleXOffsetScalerPortrait": 0.05,
+        "circleYOffsetScalerPortrait": 0.25,
+        "angleOffsetInputLandscape": 0.25,
+        "angleOffsetOutputLandscape": 0.75,
+        "angleOffsetInputPortrait": 0.0,
+        "angleOffsetOutputPortrait": 0.5
     ]
     
     var inCircle: Circle!
@@ -61,7 +67,9 @@ public class Patchbay {
             return
         }
         context.saveGState()
-        Draw.background(context, size.width, size.height, backgroundColor)
+        Draw.background(
+            context, size.width, size.height, backgroundColor)
+        context.saveGState()
         inCircle.draw(context)
         outCircle.draw(context)
         for (_, conn) in connections {
@@ -199,20 +207,30 @@ public class Patchbay {
     
     func updateScreenVariables() {
         screenSize = CGFloat.minimum(size.width, size.height)
-        let xOffset = size.width * defaults["circleCenterXOffsetScaler"]!
-        let yOffset = size.height * defaults["circleCenterYOffsetScaler"]!
+        var xOffset = size.width * defaults["circleXOffsetScalerPortrait"]!
+        var yOffset = size.height * defaults["circleYOffsetScalerPortrait"]!
+        if size.width > size.height {
+            xOffset = size.width * defaults["circleXOffsetScalerLandscape"]!
+            yOffset = size.height * defaults["circleYOffsetScalerLandscape"]!
+        }
         inCircle.point = CGPoint(
             x: (size.width / 2) - xOffset,
-            y: (size.height / 2) - yOffset)
+            y: (size.height / 2) + yOffset)
         outCircle.point = CGPoint(
             x: (size.width / 2) + xOffset,
-            y: (size.height / 2) + yOffset)
+            y: (size.height / 2) - yOffset)
     }
     
     func adjustChildrenToScreenSize() {
+        var inAngleOffset = defaults["angleOffsetInputPortrait"]! * Math.PI2
+        var outAngleOffset = defaults["angleOffsetOutputPortrait"]! * Math.PI2
+        if size.width > size.height {
+            inAngleOffset = defaults["angleOffsetInputLandscape"]! * Math.PI2
+            outAngleOffset = defaults["angleOffsetOutputLandscape"]! * Math.PI2
+        }
+        inCircle.adjustToScreenSize(screenSize, angleOffset: inAngleOffset)
+        outCircle.adjustToScreenSize(screenSize, angleOffset: outAngleOffset)
         finger.adjustToScreenSize(screenSize)
-        inCircle.adjustToScreenSize(screenSize)
-        outCircle.adjustToScreenSize(screenSize)
         for (_, conn) in connections {
             conn.adjustToScreenSize(screenSize)
         }

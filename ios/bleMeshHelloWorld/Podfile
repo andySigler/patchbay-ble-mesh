@@ -1,0 +1,4 @@
+target 'bleMeshHelloWorld' do
+	pod 'nRFMeshProvision'
+end
+

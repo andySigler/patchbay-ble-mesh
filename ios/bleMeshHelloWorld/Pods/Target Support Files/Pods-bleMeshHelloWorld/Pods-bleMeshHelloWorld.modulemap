@@ -1,0 +1,6 @@
+module Pods_bleMeshHelloWorld {
+  umbrella header "Pods-bleMeshHelloWorld-umbrella.h"
+
+  export *
+  module * { export * }
+}

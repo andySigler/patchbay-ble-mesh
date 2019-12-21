@@ -10,36 +10,6 @@ import UIKit
 import os.log
 import nRFMeshProvision
 
-extension AppDelegate: LoggerDelegate {
-    func log(message: String, ofCategory category: LogCategory, withLevel level: LogLevel) {
-        if #available(iOS 10.0, *) {
-            os_log("%{public}@", log: category.log, type: level.type, message)
-        } else {
-            NSLog("%@", message)
-        }
-    }
-}
-
-extension LogLevel {
-    /// Mapping from mesh log levels to system log types.
-    var type: OSLogType {
-        switch self {
-        case .debug:       return .debug
-        case .verbose:     return .debug
-        case .info:        return .info
-        case .application: return .default
-        case .warning:     return .error
-        case .error:       return .fault
-        }
-    }
-}
-
-extension LogCategory {
-    var log: OSLog {
-        return OSLog(subsystem: Bundle.main.bundleIdentifier!, category: rawValue)
-    }
-}
-
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -124,5 +94,35 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
 
+}
+
+extension AppDelegate: LoggerDelegate {
+    func log(message: String, ofCategory category: LogCategory, withLevel level: LogLevel) {
+        if #available(iOS 10.0, *) {
+            os_log("%{public}@", log: category.log, type: level.type, message)
+        } else {
+            NSLog("%@", message)
+        }
+    }
+}
+
+extension LogLevel {
+    /// Mapping from mesh log levels to system log types.
+    var type: OSLogType {
+        switch self {
+        case .debug:       return .debug
+        case .verbose:     return .debug
+        case .info:        return .info
+        case .application: return .default
+        case .warning:     return .error
+        case .error:       return .fault
+        }
+    }
+}
+
+extension LogCategory {
+    var log: OSLog {
+        return OSLog(subsystem: Bundle.main.bundleIdentifier!, category: rawValue)
+    }
 }
 

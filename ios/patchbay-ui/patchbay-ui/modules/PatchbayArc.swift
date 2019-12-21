@@ -115,7 +115,6 @@ public class Arc {
     
     public func draw(_ context: CGContext) {
         context.saveGState()
-        context.setShadow(offset: CGSize(width: 10, height: 10), blur: 1)
         Draw.arc(
             context, point, radius: radius,
             start: start, end: end,

@@ -115,7 +115,7 @@ class Arc {
 
   update (start, end, isSelected, sizeScaler) {
     // update this Arc's visual draw settings
-    this._sizeScaler = this.modifySizeScaler(sizeScaler);
+    this._sizeScaler = sizeScaler;
     this._isSelected = isSelected;
     this.start = (start + this.angleOffset) % utils.PI2;
     this.end = (end + this.angleOffset) % utils.PI2;

@@ -61,6 +61,7 @@ class Patchbay {
     this.inCircle.adjustToScreenSize(this.screenSize);
     this.outCircle.adjustToScreenSize(this.screenSize);
     for(let i in this.connections){
+      console.log(this.connections[i])
       this.connections[i].adjustToScreenSize(this.screenSize);
     }
   }

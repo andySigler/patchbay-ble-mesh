@@ -76,7 +76,7 @@ class Connection {
       this._lineWidth = cordDefaults.lineWidthPixels * this.sizeScaler;
 
       // colors
-      this.lineFill = utils.colors.white(this. );
+      this.lineFill = utils.colors.white(this.sizeScaler);
       this.lineStroke = utils.colors.white(this.sizeScaler);
 
       if (this._selected) {
